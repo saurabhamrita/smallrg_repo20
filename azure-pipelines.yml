@@ -1,0 +1,26 @@
+trigger:
+- main
+- feature/*
+
+pool: new_agent 
+
+steps:
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'saurabh pipeline service connection'
+    backendAzureRmOverrideSubscriptionID: '10faea19-035c-4025-9136-201ca3e88e6d'
+    backendAzureRmResourceGroupName: 'pipelinerg20'
+    backendAzureRmStorageAccountName: 'pipelinestg20'
+    backendAzureRmContainerName: 'pipelinecontainer20'
+    backendAzureRmKey: 'dev.terraform.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: '-auto-approve'
+    environmentServiceNameAzureRM: 'saurabh pipeline service connection'
+    environmentAzureRmOverrideSubscriptionID: '10faea19-035c-4025-9136-201ca3e88e6d'
+
