@@ -1,7 +1,3 @@
-resource "azurerm_resource_group" "naya_rg" {
-  name     = "naya-rg-pipeline1"
-  location = "West Europe"
-}
 
 resource "azurerm_storage_account" "naya_stg" {
   name                     = "nayastgpipeline20"
