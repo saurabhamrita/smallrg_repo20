@@ -1,5 +1,6 @@
 trigger:
 - main
+- feature/*
 
 
 pool: new_agent 
@@ -22,7 +23,15 @@ steps:
     backendAzureRmKey: 'dev.terraform.tfstate'
 
 - task: TerraformTask@5
+  displayName: terraform plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'saurabh pipeline service connection'
+
+- task: TerraformTask@5
   displayName: terraform apply
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
   inputs:
     provider: 'azurerm'
     command: 'apply'
