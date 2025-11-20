@@ -6,9 +6,11 @@ pool: new_agent
 
 steps:
 - task: TerraformInstaller@1
+  displayName: terrafor install
   inputs:
     terraformVersion: 'latest'
 - task: TerraformTask@5
+  displayName: terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -20,6 +22,7 @@ steps:
     backendAzureRmKey: 'dev.terraform.tfstate'
 
 - task: TerraformTask@5
+  displayName: terraform apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
